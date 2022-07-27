@@ -1,0 +1,24 @@
+trigger:
+- master
+
+variables:
+  - group: acr-credentials
+
+pool:
+  name: self-hosted
+
+steps:
+  - task: Docker@2
+    displayName: Login to ACR
+    inputs:
+      command: login
+      containerRegistry: dweucloudadpacr.azurecr.io
+  - task: Bash@3
+    displayName: Build and push to ACR
+    inputs:
+      targetType: 'inline'
+      script: |
+        mvn clean test package
+        docker build -t bmw.cloudadoption.vehiclemockorder-java -f src/main/docker/Dockerfile.legacy-jar .                
+        docker tag bmw.cloudadoption.vehiclemockorder-java:latest dweucloudadpacr.azurecr.io/bmw.cloudadoption.vehiclemockorder-java:v002
+        docker push dweucloudadpacr.azurecr.io/bmw.cloudadoption.vehiclemockorder-java:v002
