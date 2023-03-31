@@ -1,0 +1,142 @@
+
+---
+openapi: 3.0.3
+info:
+  title: vehicle-mock-order-producer API
+  version: 1.0.0-SNAPSHOT
+tags:
+- name: Vehicle Order API
+  description: This REST API enables operations on Vehicle order resources that are
+    backed by a Kafka topic
+paths:
+  /vehicleorder:
+    get:
+      tags:
+      - Vehicle Order API
+      summary: get all VehicleOrder entries
+      operationId: getAllVehicleOrder
+      parameters:
+      - name: local
+        in: query
+        schema:
+          type: boolean
+      responses:
+        "200":
+          description: All entries for the requested entity.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/VehicleOrder'
+    put:
+      tags:
+      - Vehicle Order API
+      summary: update vehicle order entry
+      operationId: updateVehicleOrder
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VehicleOrder'
+      responses:
+        "201":
+          description: Entry updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VehicleOrder'
+        "406":
+          description: Entry not updated.
+    post:
+      tags:
+      - Vehicle Order API
+      summary: create entry
+      operationId: create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VehicleOrder'
+      responses:
+        "201":
+          description: Entry created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VehicleOrder'
+        "406":
+          description: Entry not created.
+  /vehicleorder/{key}:
+    get:
+      tags:
+      - Vehicle Order API
+      summary: get single VehicleOrder entry
+      operationId: getVehicleOrder
+      parameters:
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Entry for the requested key.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VehicleOrder'
+        "204":
+          description: Entry for requested key not found.
+    delete:
+      tags:
+      - Vehicle Order API
+      summary: delete entry via its key
+      parameters:
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "204":
+          description: Entry deleted.
+        "406":
+          description: Entry not deleted.
+components:
+  schemas:
+    AssemblyLine:
+      type: object
+      properties:
+        plantId:
+          type: string
+        logisticLevel:
+          type: string
+        areaCode:
+          type: string
+    LocalDate:
+      format: date
+      type: string
+      example: 2022-03-10
+    OrderPerPlant:
+      type: object
+      properties:
+        plantId:
+          type: string
+        plannedOrderStartDate:
+          $ref: '#/components/schemas/LocalDate'
+        plannedOrderEndDate:
+          $ref: '#/components/schemas/LocalDate'
+        assemblyLine:
+          $ref: '#/components/schemas/AssemblyLine'
+    VehicleOrder:
+      type: object
+      properties:
+        orderNumber:
+          type: string
+        vehicleId:
+          type: string
+        orderPerPlant:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderPerPlant'

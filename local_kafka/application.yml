@@ -1,0 +1,54 @@
+micronaut:
+  security:
+    enabled: false
+akhq:
+  server:
+    access-log: 
+      enabled: true 
+      name: org.akhq.log.access 
+      format: "[Date: {}] [Duration: {} ms] [Url: {} {}] [Status: {}] [Ip: {}] [User: {}]" 
+  clients-defaults:
+    consumer:
+      properties:
+        isolation.level: read_committed
+  connections:
+    my-cluster-plain-text: 
+      properties: 
+        bootstrap.servers: "kafka:9092"
+      ui-options:
+        topic:
+          default-view: ALL  
+          skip-consumer-groups: false 
+          skip-last-record: true  
+        topic-data:
+          sort: NEWEST 
+  pagination:
+    page-size: 25 
+    threads: 16 
+  topic:
+    retention: 172800000 
+    partition: 3 
+    replication: 3 
+    internal-regexps: 
+      - "^_.*$"
+      - "^.*_schemas$"
+      - "^.*connect-config$"
+      - "^.*connect-offsets$1"
+      - "^.*connect-status$"
+    stream-regexps: 
+      - "^.*-changelog$"
+      - "^.*-repartition$"
+      - "^.*-rekey$"
+    skip-consumer-groups: false 
+    skip-last-record: false 
+  topic-data:
+    size: 50 
+    poll-timeout: 1000 
+  ui-options:
+    topic:
+      default-view: ALL  
+      skip-consumer-groups: false 
+      skip-last-record: true  
+    topic-data:
+      sort: NEWEST 
+
