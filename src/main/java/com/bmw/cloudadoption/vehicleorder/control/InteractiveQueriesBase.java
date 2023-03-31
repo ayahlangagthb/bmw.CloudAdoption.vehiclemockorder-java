@@ -27,6 +27,7 @@ import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.ws.rs.core.Response;
+import com.bmw.cloudadoption.vehicleorder.control.serdes.AllToNullSerializer;
 
 /**
  * Abstract, generic base class for kafka-streams interactive queries against a
@@ -71,22 +72,24 @@ public class InteractiveQueriesBase<K, V, R> {
     private HostInfo hostInfo;
 
     // name of the kafka-streams state-store
-    private final String stateStoreName;
+    private String stateStoreName;
 
     // cache for all microprofile rest-clients on different ip-adresses (OpenShift pods)
     private final Map<String, R> restClientCache = new HashMap<>();
 
     // function for getting one value by key (in the local state-store)
-    private final BiFunction<R, K, V> getEntry;
+    private BiFunction<R, K, V> getEntry;
 
     // function for getting all values (in the local state-store)
-    private final Function<R, CompletionStage<List<V>>> getAll;
+    private Function<R, CompletionStage<List<V>>> getAll;
 
     // function for getting the rest-client for a URL
-    private final Function<URL, R> getRestClient;
+    private Function<URL, R> getRestClient;
 
     // type of the topic-key
-    private final Class<K> keyType;
+    private Class<K> keyType;
+
+    public InteractiveQueriesBase(){}
 
     /**
      * Creates an instance that overs all required functions to interact with
