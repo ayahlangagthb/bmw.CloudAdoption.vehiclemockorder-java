@@ -58,5 +58,5 @@ jobs:
           ECR_REPOSITORY: ${{ env.ECR_REPOSITORY }}
           IMAGE_TAG: latest
         run: |
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -f src/main/docker/Dockerfile .
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -f src/main/docker/Dockerfile.jvm .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
