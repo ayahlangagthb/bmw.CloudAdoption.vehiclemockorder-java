@@ -59,4 +59,4 @@ jobs:
           IMAGE_TAG: latest
         run: |
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -f src/main/docker/Dockerfile.jvm .
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          docker push 897004837190.dkr.ecr.eu-west-1.amazonaws.com/bmw.cloudadoption.vehiclemockorder-java:$IMAGE_TAG
