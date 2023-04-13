@@ -12,7 +12,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      ECR_REPOSITORY : "bmw.cloudadoption.vehiclemockorder-java"
       MAVEN_VERSION: 3.8.2
 
     steps:
@@ -55,7 +54,7 @@ jobs:
         id: build-image
         env:
           REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          REPOSITORY: ${{ env.ECR_REPOSITORY }}
+          REPOSITORY: bmw.cloudadoption.vehiclemockorder-java
         run: |
           docker build -t $REGISTRY/$REPOSITORY:latest -f src/main/docker/Dockerfile.jvm .
           docker push $REGISTRY/$REPOSITORY:latest
