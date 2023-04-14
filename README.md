@@ -36,7 +36,7 @@ sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule require
 
 Run the command (in the bin folder) to consume from the topic:
 ```
-.\kafka-console-consumer.bat --bootstrap-server pkc-lq8gm.westeurope.azure.confluent.cloud:9092 --topic bmw.cloudadoption.vehiclemockorder.v1 --consumer.config otd-sandbox-config.properties --property print.key=true
+.\kafka-console-consumer.bat --bootstrap-server pkc-lq8gm.westeurope.azure.confluent.cloud:9092 --topic bmw.cloudadoption.vehiclemockorder.v1 --consumer.config sandbox-config.properties --property print.key=true
 ```
 
 
