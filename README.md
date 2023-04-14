@@ -22,7 +22,23 @@ From the [local_kafka](local_kafka) folder run:
 docker-compose up -d
 ```
 
-This will bring up kafka running in docker. Use the AKHQ front end at http://localhost:8070 to create the topic bmw.cloudadoption.VehicleMockOrder.v1 with a partion and replication value of 1
+## Connecting to the deployed Kafka cluster
+
+[Download the kafka binary](https://kafka.apache.org/downloads)
+Create a properties file in the bin folder called sandbox-config.properties with the following:
+```
+bootstrap.servers=pkc-lq8gm.westeurope.azure.confluent.cloud:9092
+ssl.endpoint.identification.algorithm=https
+security.protocol=SASL_SSL
+sasl.mechanism=PLAIN
+sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule required username="3LVJS32PKIBHQOMX" password="GgGhT2lm+cu1KTQWhwdJ/cOoFLchKIr1dHHaisYfsPK3J3r8+WCCc/VIowvlHCUB";
+```
+
+Run the command (in the bin folder) to consume from the topic:
+```
+.\kafka-console-consumer.bat --bootstrap-server pkc-lq8gm.westeurope.azure.confluent.cloud:9092 --topic bmw.cloudadoption.vehiclemockorder.v1 --consumer.config otd-sandbox-config.properties --property print.key=true
+```
+
 
 ## Running the application in dev mode
 
