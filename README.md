@@ -69,3 +69,10 @@ Once deployed you can view the swagger page at http://localhost:8080/q/swagger-u
 }
 ```
 
+## Deployment URL
+
+https://vehicle-order-service-java.ttd.aws.bmw.cloud/
+
+## Swagger URL
+
+https://vehicle-order-service-java.ttd.aws.bmw.cloud/q/swagger-ui
