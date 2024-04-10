@@ -68,7 +68,7 @@ Once deployed you can view the swagger page at http://localhost:8080/q/swagger-u
 
 ## Deployment URL
 
-https://vehicle-order-service-java.ttd.aws.bmw.cloud/
+https://vehicle-order-service-java.ttd.azure.bmw.cloud/
 
 
 ## Technical Documentation for Vehicle Order Service (VOS)
@@ -87,7 +87,7 @@ Here is the entire list of available endpoints. All of them are detailed in the 
 
 ### Swagger URL
 
-https://vehicle-order-service-java.ttd.aws.bmw.cloud/q/swagger-ui
+https://vehicle-order-service-java.ttd.azure.bmw.cloud/q/swagger-ui
 
 ## Data flow
 
